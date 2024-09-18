@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pomodoro Time Tracker</title>
+    <title>Pomodoro Timer | Focus</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div id="timer-message">Please Select a timer before Starting.</div>
+
+    <div id="timer-message">Please select a timer before starting.</div>
+
     <div class="container">
         <div class="timer">
-            <h1 id="timer">⏰PomoDoro Timer</h1>
+            <h1>⏰ Pomodoro Timer</h1>
+
             <div class="button-container">
-                <button class="btn-ps" >Pomoodoro</button>
-                <button class="btn-s" >Short Break</button>
-                <button class="btn-l" >Long Break</button>
+                <button class="button" id="pomodoro-session">Pomodoro</button>
+                <button class="button" id="short-break">Short Break</button>
+                <button class="button" id="long-break">Long Break</button>
             </div>
+
             <main>
                 <div class="pomodoro">
                     <div id="pomodoro-timer" class="timer-display" data-duration="25.00">
@@ -29,17 +35,18 @@
                     <div id="long-timer" class="timer-display" data-duration="10.00">
                         <h1 class="time">10:00</h1>
                     </div>
-
                 </div>
             </main>
 
-            <div class="buttons"> 
-                <button id="start">Start</button>
-                <button id="stop"> Stop</button>
+            <div class="buttons">
+                <button id="start">START</button>
+                <button id="stop">STOP</button>
             </div>
         </div>
     </div>
-    <!-- js -->
-     <script src="script.js"></script>
+
+    <!-- JS -->
+    <script src="script.js"></script>
 </body>
+
 </html>
