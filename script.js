@@ -1,7 +1,7 @@
 let pomodoro = document.getElementById("pomodoro-timer");
 let short = document.getElementById("short-timer");
 let long = document.getElementById("long-timer");
-let timers = document.getElementById("timer-display");
+let timers = document.querySelectorAll("timer-display");
 let session = document.getElementById("pomodoro-session");
 let shortBreak = document.getElementById("short-break");
 let longBreak = document.getElementById("long-break");
@@ -34,3 +34,26 @@ session.addEventListener("click", () => {
     pomodoro.style.display = "block";
     session.classList.add("active");
     shortBreak.classList.remove("active");
+    longBreak.classList.remove("active");
+    
+});
+shortBreak.addEventListener("click", () => { 
+    hideAll();
+
+    short.style.display = "block";
+    pomodoro.style.display = "none";
+
+    session.classList.remove("active");
+    shortBreak.classList.add("active");
+    longBreak.classList.remove("active");
+    
+});
+longBreak.addEventListener("click", () => { 
+    hideAll();
+    long.style.display = "block";
+    pomodoro.style.display = "none";
+    session.classList.remove("active");
+    shortBreak.classList.remove("active");
+    longBreak.classList.add("active");
+    
+});
