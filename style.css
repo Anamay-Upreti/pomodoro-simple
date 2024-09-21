@@ -155,3 +155,16 @@ h1{
     width: 500px;
    }
 }
+.time-input {
+    font-size: 3rem;
+    width: 4rem;
+    text-align: center;
+    border: none;
+    background: transparent;
+    color: #d7e0ff;
+}
+
+span {
+    font-size: 3rem;
+    color: #d7e0ff;
+}
