@@ -38,7 +38,7 @@ session.addEventListener("click", () => {
     session.classList.add("active");
     shortBreak.classList.remove("active");
     longBreak.classList.remove("active");
-    currentTimer = pomodoro.querySelector('.time');
+    currentTimer = pomodoro;
 });
 
 // Event listener for short break
@@ -48,7 +48,7 @@ shortBreak.addEventListener("click", () => {
     session.classList.remove("active");
     shortBreak.classList.add("active");
     longBreak.classList.remove("active");
-    currentTimer = short.querySelector('.time');
+    currentTimer = short;
 });
 
 // Event listener for long break
@@ -58,30 +58,35 @@ longBreak.addEventListener("click", () => {
     session.classList.remove("active");
     shortBreak.classList.remove("active");
     longBreak.classList.add("active");
-    currentTimer = long.querySelector('.time');
+    currentTimer = long;
 });
 
 // Start the timer on click
-function startTimer(timerDisplay) {
+function startTimer(timerElement) {
     if (myInterval) {
         clearInterval(myInterval);
     }
 
-    let timerDuration = timerDisplay.parentElement.getAttribute("data-duration");
-    let durationInMinutes = parseFloat(timerDuration) * 60;
-    let endTime = Date.now() + durationInMinutes * 1000;
+    // Get user-defined minutes and seconds
+    let minutesInput = timerElement.querySelector('input[type="number"]:nth-child(1)').value;
+    let secondsInput = timerElement.querySelector('input[type="number"]:nth-child(3)').value;
+    let durationInSeconds = (parseInt(minutesInput) * 60) + parseInt(secondsInput);
+
+    let endTime = Date.now() + durationInSeconds * 1000;
 
     myInterval = setInterval(() => {
         let timeLeft = endTime - Date.now();
 
         if (timeLeft <= 0) {
             clearInterval(myInterval);
-            timerDisplay.textContent = "00:00";
+            timerElement.querySelector('input[type="number"]:nth-child(1)').value = '00';
+            timerElement.querySelector('input[type="number"]:nth-child(3)').value = '00';
             alarmSound.play();  // Play the beep sound when time is up
         } else {
             let minutes = Math.floor(timeLeft / 60000);
             let seconds = Math.floor((timeLeft % 60000) / 1000).toString().padStart(2, '0');
-            timerDisplay.textContent = `${minutes}:${seconds}`;
+            timerElement.querySelector('input[type="number"]:nth-child(1)').value = minutes;
+            timerElement.querySelector('input[type="number"]:nth-child(3)').value = seconds;
         }
     }, 1000);
 }
