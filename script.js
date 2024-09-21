@@ -12,6 +12,9 @@ let timerMsg = document.getElementById("timer-message");
 let currentTimer = null;
 let myInterval = null;
 
+// Sound file for timer completion
+let alarmSound = new Audio('beep.mp3');  // Assuming beep.mp3 is in the same directory
+
 // Show the default Pomodoro timer
 function showDefaultTimer() {
     pomodoro.style.display = "block";
@@ -74,10 +77,7 @@ function startTimer(timerDisplay) {
         if (timeLeft <= 0) {
             clearInterval(myInterval);
             timerDisplay.textContent = "00:00";
-            const alarm = new Audio(
-                "https://www.freespecialeffects.co.uk/soundfx/scifi/electronic.wav"
-            );
-            alarm.play();
+            alarmSound.play();  // Play the beep sound when time is up
         } else {
             let minutes = Math.floor(timeLeft / 60000);
             let seconds = Math.floor((timeLeft % 60000) / 1000).toString().padStart(2, '0');
