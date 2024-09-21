@@ -68,10 +68,19 @@ function startTimer(timerElement) {
     }
 
     // Get user-defined minutes and seconds
-    let minutesInput = timerElement.querySelector('input[type="number"]:nth-child(1)').value;
-    let secondsInput = timerElement.querySelector('input[type="number"]:nth-child(3)').value;
-    let durationInSeconds = (parseInt(minutesInput) * 60) + parseInt(secondsInput);
+    let minutesInput = timerElement.querySelector('input[type="number"]:nth-child(1)');
+    let secondsInput = timerElement.querySelector('input[type="number"]:nth-child(3)');
 
+    let minutes = parseInt(minutesInput.value) || 0;
+    let seconds = parseInt(secondsInput.value) || 0;
+
+    // Validate input
+    if (minutes < 0 || seconds < 0 || seconds >= 60) {
+        timerMsg.style.display = "block";
+        return; // Stop if invalid input
+    }
+
+    let durationInSeconds = (minutes * 60) + seconds;
     let endTime = Date.now() + durationInSeconds * 1000;
 
     myInterval = setInterval(() => {
@@ -79,14 +88,15 @@ function startTimer(timerElement) {
 
         if (timeLeft <= 0) {
             clearInterval(myInterval);
-            timerElement.querySelector('input[type="number"]:nth-child(1)').value = '00';
-            timerElement.querySelector('input[type="number"]:nth-child(3)').value = '00';
-            alarmSound.play();  // Play the beep sound when time is up
+            minutesInput.value = '00';
+            secondsInput.value = '00';
+            alarmSound.play();
+            timerMsg.style.display = "block"; // Show a message when timer is done
         } else {
-            let minutes = Math.floor(timeLeft / 60000);
-            let seconds = Math.floor((timeLeft % 60000) / 1000).toString().padStart(2, '0');
-            timerElement.querySelector('input[type="number"]:nth-child(1)').value = minutes;
-            timerElement.querySelector('input[type="number"]:nth-child(3)').value = seconds;
+            let remainingMinutes = Math.floor(timeLeft / 60000);
+            let remainingSeconds = Math.floor((timeLeft % 60000) / 1000).toString().padStart(2, '0');
+            minutesInput.value = remainingMinutes;
+            secondsInput.value = remainingSeconds;
         }
     }, 1000);
 }
